@@ -1,1 +1,18 @@
 /* Write styles here */
+.container{
+    position: relative; 
+}
+img{
+    position: absolute;
+    top:15%;
+    width: 60%;
+    left: 40%;
+    max-width: 100%;
+}
+@media (min-width: 320px) and (max-width: 740px) {
+    img {
+      position: static; /* Reset the position to static, so the image flows in the document flow */
+      margin: 0 auto; /* Center the image horizontally */
+      display: block; /* To remove any extra spacing caused by inline elements */
+    }
+}

@@ -1,25 +1,60 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Profile</title>
+    <title>MeShop.</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="#">upgrade your browser</a> to improve your experience.
-      </p>
-    <![endif]-->
-
-    <script src="" async defer></script>
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body " data-bs-theme="dark">
+      <div class="container-fluid  ms-5">
+        <a class="navbar-brand mb-0 h1 " href="#">MeShop.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-lg-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav nav nav-underline me-5">
+            <a class="nav-link "  href="../index.html">Home</a>
+            <a class="nav-link " href="../login.html">Login</a>
+            <a class="nav-link "  href="../signup.html">Signup</a>
+            <a class="nav-link " href="../cart/index.html">My Cart</a>
+            <a class="nav-link " aria-current="page" href="#">Profile</a>
+          </div>
+        </div>
+      </div>
+  </nav>
+    <h1>My Profile</h1>
+    <div class="form">
+      <input type="text" id="fname" placeholder="First Name">
+    </div>
+    <div class="form">
+      <input type="text" name="" id="lname" placeholder="Last Name">
+    </div>
+    <div class="form">
+      <button type="button" class="btn btn-dark me-5">Save Info</button>
+    </div>
+    <h1>Edit Password</h1>
+    <div class="form">
+      <input type="text" name="" id="opswd" placeholder="Old Password">
+    </div>
+    <div class="form">
+      <input type="text" name="" id="npswd" placeholder="New Password">
+    </div>
+    <div class="form">
+      <input type="text" name="" id="cpswd" placeholder="Confirm New Password">
+    </div>
+    <div class="form">
+      <button type="button" class="btn btn-dark  me-5">Change Password</button>
+    </div>
+    <div class="form">
+      <button type="button" class="btn btn-dark me-5">Logout</button>
+    </div>
+    <script src="./script.js"></script>
   </body>
 </html>

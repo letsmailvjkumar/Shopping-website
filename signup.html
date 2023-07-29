@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Signup</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <style>
+        .form-group{
+            padding: 0.5rem;
+        }
+        #fname{
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+            height: 40px;
+        }
+        #lname{
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+            height: 40px;
+        }
+        #email{
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+            height: 40px;
+        }
+        #pswd{
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+            height: 40px;
+        }
+        #cpswd{
+            width: 100%;
+            border-radius: 5px;
+            padding-left: 10px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body " data-bs-theme="dark">
+        <div class="container-fluid  ms-5">
+          <a class="navbar-brand mb-0 h1 " href="#">MeShop.</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-flex justify-content-lg-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav nav nav-underline me-5">
+              <a class="nav-link "  href="./index.html">Home</a>
+              <a class="nav-link " href="./login.html">Login</a>
+              <a class="nav-link " aria-current="page" href="#">Signup</a>
+              <a class="nav-link " href="./cart/index.html">My Cart</a>
+              <a class="nav-link " href="./profile/index.html">Profile</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+    <h1 class="head ms-2">Signup</h1>
+    <form id="signupForm">
+    <div class="form-group">
+        <input type="text" id="fname" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <input type="text" name="" id="lname" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <input type="email" name="" id="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <input type="password" name="" id="pswd" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input type="password" name="" id="cpswd" placeholder="Confirm Password">
+      </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark me-5">Signup</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("signupForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    handleSignup();
+});
+
+function handleSignup() {
+    const firstName = document.getElementById("fname").value;
+    const lastName = document.getElementById("lname").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("pswd").value;
+    const confirmPassword = document.getElementById("cpswd").value;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match. Please try again.");
+        return;
+    }
+
+    // Store user data in local storage
+    const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+    };
+
+    localStorage.setItem("userData", JSON.stringify(userData));
+    alert("Signup successful. You can now login with your credentials.");
+    // Redirect to the login page or any other desired action after signup
+}
+</script>
+</body>
+</html>

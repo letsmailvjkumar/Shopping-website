@@ -1,1 +1,45 @@
 /* Write your styles here */
+h1{
+    text-align: center;
+}
+.form{
+    padding: 0.75rem;
+}
+#fname{
+    width: 70%;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left:15%;
+}
+#lname{
+    width: 70%;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left:15%;
+}
+#opswd{
+    width: 70%;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left:15%;
+}
+#npswd{
+    width: 70%;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left:15%;
+}
+#cpswd{
+    width: 70%;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    margin-left:15%;
+}
+button{
+    margin-left: 15%;
+}

@@ -1,3 +1,11 @@
-// myProducts.filter((item)=>item.title.includes(search.value))
+const btn = document.getElementById("login");
 
-// myCartProductArray = myProducts.filter((item)=> myCartIDs.includes(item.id))
+btn.addEventListener('click', ()=>{
+    window.open("./login.html");
+})
+
+const btn1 = document.getElementById("signup");
+
+btn1.addEventListener('click', ()=>{
+    window.open("./signup.html");
+})
