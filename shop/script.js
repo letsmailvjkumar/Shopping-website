@@ -1,190 +1,155 @@
-const productContainer = document.getElementById("productContainer");
-const searchInput = document.getElementById("searchInput");
-const toggleButtons = document.querySelectorAll(".toggle-button");
-let productsData = [];
+const baseUrl = 'https://fakestoreapi.com';
+const productAPI = 'https://fakestoreapi.com/products';
 
-// Fetch products from API
-async function fetchProducts() {
-  try {
-    const response = await fetch("https://fakestoreapi.com/products");
-    const products = await response.json();
-    productsData = products; // Assuming productsData is a global variable where you want to store the fetched products
-    console.log(productsData); // Add this line to check the contents of the productsData array
-    displayProducts(products); // Call the displayProducts function with the fetched products
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  }
-}
-fetchProducts();
+const searchInput = document.getElementById('searchInput');
+const colorCheckBoxes = document.querySelectorAll('input[name="color"]');
+const sizeCheckboxes = document.querySelectorAll('input[name="size"]');
+const priceCheckboxes = document.querySelectorAll('input[name="prange"]');
+const productArray=[];
 
-// Function to generate a random color
-function getRandomColor() {
-  const colors = ["red", "blue", "green", "black", "white"];
-  return colors[Math.floor(Math.random() * colors.length)];
+let colors = ['red', 'green', 'blue', 'black', 'white'];
+let sizes = ['s', 'm', 'l', 'xl'];
+
+function randomColor(){
+    let color = colors[Math.floor(Math.random()*colors.length)];
+    return color;
 }
 
-// Function to generate a random size
-function getRandomSize() {
-  const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
-  return sizes[Math.floor(Math.random() * sizes.length)];
+function randomRating(){
+    let rating = Math.floor(Math.random()*5)+1;
+    return rating;
 }
 
-// Function to add default values for colors and sizes to each product
-function addDefaultValuesToProducts(products) {
-  products.forEach((product) => {
-    product.colors = product.colors || [getRandomColor()]; // Add default color if not provided
-    product.sizes = product.sizes || [getRandomSize()]; // Add default size if not provided
-  });
+function randomSize(){
+  let size = sizes[Math.floor(Math.random()*sizes.length)];
+  return size;
 }
 
-// Call the function to add default values to the products array
-addDefaultValuesToProducts(products);
-
-// Now, you can call the displayProducts function to display the products with default colors and sizes
-displayProducts(products);
-
-// Function to display products on the shop page
-async function displayProducts() {
-  const products = await fetchProducts();
-  addRandomColorsAndSizesToProducts(products);
-
-  const productContainer = document.getElementById("productContainer");
-
-  // Check if the product container element exists before proceeding
-  if (!productContainer) {
-    console.error("Product container not found!");
-    return;
-  }
-
-  productContainer.innerHTML = ""; // Clear the previous products
-
-  products.forEach((product) => {
-    const productElement = document.createElement("div");
-    productElement.classList.add("item");
-    productElement.innerHTML = `
-    <!-- Product details -->
-    <img src="${product.image}" alt="${product.title}" />
-    <div class="info">
-      <div class="row">
-        <div class="price">$${product.price}</div>
-        <div class="sized">${product.sizes?.join(", ")}</div>
-      </div>
-      <div class="colors">
-        Colors:
-        <div class="row">
-          ${product.colors
-            .map((color) => `<div class="circle" style="background-color: ${color}"></div>`)
-            .join("")}
-        </div>
-      </div>
-      <div class="row">Rating: ${product.rating}</div>
-    </div>
-    <button class="addBtn">Add to Cart</button>
-    `;
-
-    // Get the addBtn element inside the current product element
-    const addBtn = productElement.querySelector(".addBtn");
-
-    // Check if the addBtn element exists before adding the event listener
-    if (addBtn) {
-      addBtn.addEventListener("click", () => {
-        // Implement the logic for adding the product to the cart here
-        console.log(`Product "${product.title}" added to cart.`);
-      });
+function displayRating(rating){
+    let stars ='';
+    for(let i=0;i<rating;i++){
+        stars+='⭐';
     }
-
-    productContainer.appendChild(productElement);
-  });
+    return stars;
 }
+async function getProducts(){
+    const response = await fetch(productAPI);
+    const products = await response.json();
+    for(let product of products){
+        product.color=randomColor();
+        product.rating = randomRating();
+        product.star=displayRating(product.rating);
+        product.size=randomSize();
+    }
+    productArray.push(...products);
+    console.log(productArray)
+    displayProducts(productArray);
+    
+}
+getProducts();
 
-// Call the displayProducts function to show products on the shop page
-displayProducts();
 
-// Display products based on filters
-function displayProducts(products) {
-  const productContainer = document.getElementById("productContainer"); // Get the product container element here
-
-  // Check if the product container element exists before proceeding
-  if (!productContainer) {
-    console.error("Product container not found!");
-    return;
-  }
-
-  productContainer.innerHTML = ""; // Clear the previous products
-
-  products.forEach((product) => {
-    const productElement = document.createElement("div");
-    productElement.classList.add("item");
-    productElement.innerHTML = `
-      <!-- Product details -->
-      <img src="${product.image}" alt="${product.title}" />
-      <div class="info">
-        <div class="row">
-          <div class="price">$${product.price}</div>
-          <div class="sized">${product.size.join(", ")}</div>
+function displayProducts(productArray){
+    const container = document.getElementById('items');
+    container.innerHTML = '';
+    for(const product  of productArray){
+        const productDiv = document.createElement('div');
+        productDiv.className = 'item';
+        productDiv.innerHTML=`
+        
+        <img src="${product.image}" alt ="${product.title}">
+        <div class ="info">
+            <div class="title"><p>${product.title}</p></div>
+            <div class ="row">
+            <div class="price"><p>Price : $${product.price}</p></div>
+            <div class="sized"><p>Size : ${product.size}</p></div>
+            </div>
+            <div class="colors">
+            <div class ="row"><p>color : ${product.color}</p></div>
+            </div>
+            <div class="row"><p>rating : ${product.star} ${product.rating}</p></div>
+            <button id="addBtn">Add to Cart</button>
         </div>
-        <div class="colors">
-          Colors:
-          <div class="row">
-            ${product.colors
-              .map((color) => `<div class="circle" style="background-color: ${color}"></div>`)
-              .join("")}
-          </div>
-        </div>
-        <div class="row">Rating: ${product.rating}</div>
-      </div>
-      <button class="addBtn">Add to Cart</button>
-    `;
-
-     // Get the addBtn element inside the current product element
-     const addBtn = productElement.querySelector(".addBtn");
-
-     // Check if the addBtn element exists before adding the event listener
-     if (addBtn) {
-       addBtn.addEventListener("click", () => {
-         // Implement the logic for adding the product to the cart here
-         console.log(`Product "${product.title}" added to cart.`);
-       });
-     }
-
-    productContainer.appendChild(productElement);
-  });
-
-
+        `;
+        container.appendChild(productDiv);
+    }
 }
 
 
-// Search functionality
-searchInput.addEventListener("input", function () {
-  const searchTerm = searchInput.value.toLowerCase().trim();
-  const filteredProducts = productsData.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm)
-  );
-
+//seach function
+searchInput.addEventListener('input', (event) => {
+  const searchQuery = event.target.value.toLowerCase();
+  const filteredProducts = productArray.filter(product => product.title.toLowerCase().includes(searchQuery));
   displayProducts(filteredProducts);
-
-  if (filteredProducts.length === 0) {
-    productContainer.innerHTML = "<p>No products found for the search term.</p>";
-  }
 });
 
-// Toggle buttons functionality
-toggleButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    toggleButtons.forEach((btn) => btn.classList.remove("active"));
-    this.classList.add("active");
+function applyFilters() {
+  let filteredProducts = productArray;
 
-    const category = this.dataset.category;
+  // Filter by color
+  const selectedColors = Array.from(colorCheckBoxes )
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.id);
+  if (selectedColors.length > 0) {
+      filteredProducts = filteredProducts.filter(product => selectedColors.includes(product.color));
+  }
 
-    if (category === "all") {
-      displayProducts(productsData);
-    } else {
-      const filteredProducts = productsData.filter((product) => product.category.toLowerCase() === category);
-      displayProducts(filteredProducts);
+  // Filter by size
+  const selectedSizes = Array.from(sizeCheckboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.id);
+  if (selectedSizes.length > 0) {
+      filteredProducts = filteredProducts.filter(product => selectedSizes.includes(product.size));
+  }
 
-      if (filteredProducts.length === 0) {
-        productContainer.innerHTML = "<p>No products found in this category.</p>";
-      }
-    }
-  });
+  // Filter by rating
+  let selectedRating = document.getElementById('range').value;
+  if (selectedRating > 0) {
+    filteredProducts = filteredProducts.filter(product => 
+      product.rating == selectedRating);
+  };
+  
+
+  // Filter by price
+  const selectedPrices = Array.from(priceCheckboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.id);
+  if (selectedPrices.length > 0) {
+      filteredProducts = filteredProducts.filter(product => {
+          if (selectedPrices.includes('0-25')) {
+              return product.price >= 0 && product.price <= 25;
+          }
+          if (selectedPrices.includes('25-50')) {
+              return product.price > 25 && product.price <= 50;
+          }
+          if (selectedPrices.includes('50-100')) {
+              return product.price > 50 && product.price <= 100;
+          }
+          if (selectedPrices.includes('100on')) {
+              return product.price > 100;
+          }
+      });
+  }
+
+  displayProducts(filteredProducts);
+}
+document.querySelector('.cart-btn').addEventListener('click', applyFilters);
+
+
+
+document.querySelector('.menu-btn').addEventListener('click', () => {
+  document.querySelector('.nav-items').classList.toggle('show');
+});
+
+
+// store the item in local store
+document.addEventListener('click', function(event) {
+  if (event.target.matches('#addBtn')) {
+    // Get the product title from the title element
+    const productTitle = event.target.closest('.item').querySelector('.title p').textContent;
+    // Find the product object in the productArray
+    const selectedProduct = productArray.find(product => product.title === productTitle);
+    // Store the selected product in local storage
+    localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
+  }
 });

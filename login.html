@@ -83,7 +83,7 @@ function handleLogin() {
     if (loginEmail === userData.email && loginPassword === userData.password) {
         alert("Login successful. Welcome, " + userData.firstName + "!");
         // Redirect to the user's profile or any other desired action after login
-        window.open("./shop/index.html", "_self");
+        window.open("./shop/index.html", "_blank");
     } else {
         alert("Incorrect email or password. Please try again.");
     }
