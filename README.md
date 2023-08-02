@@ -7,8 +7,10 @@
 <li>- CSS (including Bootstrap framework)</li>
 <li>- JavaScript</li>
 <li>- [FakeStoreAPI](https://fakestoreapi.com/) for product data</li>
+
 <h3>Live Demo</h3>
-<a href="https://letsmailvjkumar.github.io/Shopping-website/"></a>
+Check out the live demo [here](https://letsmailvjkumar.github.io/Shopping-website/).
+
 <h3>Features</h3>
 <li>User authentication using local storage.</li>
 <li>User sign-up with first name, last name, email, password, and confirm password.</li>
