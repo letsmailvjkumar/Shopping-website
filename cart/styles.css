@@ -1,6 +1,5 @@
 .container{
   display: flex;
-  
 }
 #items {
   display: flex;
@@ -17,7 +16,6 @@
 #items .item {
   border: 1px solid black;
   width: 30%;
-  
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -86,9 +84,8 @@ hr{
 }
 
 
-@media (min-width: 320px) and (max-width :480px) {
-  
-  #items{
+@media (min-width: 320px) and (max-width :570px) {
+  .container{
     display: flex;
     flex-direction: column;
   }
@@ -96,10 +93,19 @@ hr{
       width: 80%; 
       margin: 0 auto;
   }
+  #checkout{
+    width: 90%;
+    margin: 0 auto;
+    height: 50vh;
+  }
   #searchInput{
     width: 100%;
   }
   .nav-items.show {
     display: block;
 }
+  #rzp-button1{
+    width: 100%;
+    margin: 15% auto;
+  }
 }
